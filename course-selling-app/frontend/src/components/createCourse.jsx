@@ -1,5 +1,6 @@
 import { useState } from "react"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateCourse(){
     const [name,setName] = useState("");
@@ -7,6 +8,7 @@ export default function CreateCourse(){
     const [price,setPrice] = useState("");
     const [tutor,setTutor] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
+    const navigate = useNavigate();
 
     
     async function AdminCreate() {
@@ -47,6 +49,9 @@ export default function CreateCourse(){
             setTutor(e.target.value);
         }}></input><br></br><br></br>
         <button onClick={AdminCreate}>Create Course</button>
-        <div>{successMsg}</div>
+        <div>{successMsg}</div><br></br><br></br>
+        <button onClick={() => {
+            navigate("/adminHome")
+        }}>Go back</button>
     </div>
 }

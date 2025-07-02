@@ -25,7 +25,7 @@ export default function AdminSignin() {
                 },500);
             }
             catch(e){
-                setSuccessMsg("Either username or password is invalid");
+                setSuccessMsg(e.response.data.msg);
                 console.log(e.response.data.msg)
             }
         }

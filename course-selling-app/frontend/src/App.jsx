@@ -32,7 +32,7 @@ function App() {
           <Route path="/adminShowCourses" element={<AdminShowCourses />} />
           <Route path="/createCourse" element={<CreateCourse />} />
           <Route path="/userShowCourses" element={<UserShowCourses />} />
-          <Route path="/purchaseCourses" element={<PurchaseCourses />} />
+          <Route path="/purchaseCourses/:id" element={<PurchaseCourses />} />
           <Route path="/showPurchasedCourses" element={<ShowPurchasedCourses />} />
         </Routes>
       </BrowserRouter>

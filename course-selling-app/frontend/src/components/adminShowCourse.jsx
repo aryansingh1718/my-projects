@@ -30,6 +30,9 @@ export default function AdminShowCourses(){
             Loading Courses
         </div>
     }
+    else if(courses.length == 0){
+      return <h1>No courses are available</h1>
+    }
     else{
        return (
   <div>

@@ -5,9 +5,6 @@ export default function UserHome(){
         <button onClick={() => {
             navigate("/userShowCourses")
         }}>Show all the available courses</button><br></br><br></br>
-        <button onClick={() => {
-            navigate("/purchaseCourses")
-        }}>purchase courses</button><br></br><br></br>
          <button onClick={() => {
             navigate("/showPurchasedCourses")
         }}>Show purchased courses</button>
