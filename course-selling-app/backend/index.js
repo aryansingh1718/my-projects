@@ -26,10 +26,15 @@ mongoose.connect(MONGO_URL, {
 });
 
 app.use(bodyParser.json());
-app.use(cors({
-  origin: "*", 
-}));
+const allowedOrigins = [
+  "http://localhost:5173",  // Vite dev server
+  "https://course-selling-frontend.vercel.app" // Production
+];
 
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 
