@@ -12,8 +12,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 
 app.use(bodyParser.json());
-app.use(cors({}));
-
+app.use(cors({
+  origin: "*",  
+}));
 
 app.use("/admin",adminRouter);
 app.use("/user",userRouter);
