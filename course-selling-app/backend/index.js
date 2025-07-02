@@ -28,7 +28,7 @@ mongoose.connect(MONGO_URL, {
 app.use(bodyParser.json());
 const allowedOrigins = [
   "http://localhost:5173",  // Vite dev server
-  "https://course-selling-frontend.vercel.app" // Production
+  "https://course-selling-frontend-xi.vercel.app" // Your actual production domain
 ];
 
 app.use(cors({
