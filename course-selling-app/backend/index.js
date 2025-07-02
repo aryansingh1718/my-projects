@@ -22,22 +22,37 @@ mongoose.connect(MONGO_URL, {
   console.log(" Connected to MongoDB");
 }).catch((err) => {
   console.error(" MongoDB connection error:", err.message);
-  process.exit(1); // Exit if connection fails
+  process.exit(1);
 });
 
-app.use(bodyParser.json());
-const allowedOrigins = [
-  "http://localhost:5173",  // Vite dev server
-  "https://course-selling-frontend-xi.vercel.app" // Your actual production domain
-];
-
+// CORS middleware
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "https://course-selling-frontend.vercel.app",
+      "https://course-selling-frontend-xi.vercel.app"
+    ];
+
+    const isAllowed =
+      !origin || 
+      allowedOrigins.includes(origin) ||
+      /^https:\/\/course-selling-frontend.*\.vercel\.app$/.test(origin); // allow all preview Vercel URLs
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS: " + origin));
+    }
+  },
   credentials: true
 }));
+
+app.use(bodyParser.json());
+
 app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(` Server running on port ${PORT}`);
 });
