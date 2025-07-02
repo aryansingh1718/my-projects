@@ -5,6 +5,11 @@ const bodyParser = require('body-parser');
 const adminRouter = require("./adminRoute");
 const userRouter = require("./userRoute");
 const cors = require("cors")
+const PORT = process.env.PORT || 3000;
+const MONGO_URL = process.env.MONGO_URL;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+
 
 app.use(bodyParser.json());
 app.use(cors({}));
@@ -13,6 +18,6 @@ app.use(cors({}));
 app.use("/admin",adminRouter);
 app.use("/user",userRouter);
 
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
