@@ -12,7 +12,7 @@ export default function CreateCourse(){
     async function AdminCreate() {
         try{
             const token = localStorage.getItem("token")
-             const res = await axios.post("http://localhost:3000/admin/createCourses",{
+             const res = await axios.post("https://course-selling-backend-fiib.onrender.com/admin/createCourses",{
             name,
             description,
             price:Number(price),

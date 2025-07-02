@@ -9,7 +9,7 @@ export default function AdminShowCourses(){
         async function getCourses() {
             try{
                 const token = localStorage.getItem("token");
-                const res = await axios.get("http://localhost:3000/admin/showcourses",{
+                const res = await axios.get("https://course-selling-backend-fiib.onrender.com/admin/showcourses",{
                     headers:{
                         Authorization:"Bearer " + token
                     }

@@ -12,7 +12,7 @@ export default function UserSignup() {
     
    async function UserSignupFunction() {
   try {
-    const res = await axios.post("http://localhost:3000/user/signup", {
+    const res = await axios.post("https://course-selling-backend-fiib.onrender.com/user/signup", {
       username,
       password
     }, {

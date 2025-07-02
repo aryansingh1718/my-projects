@@ -9,7 +9,7 @@ export default function AdminSignin() {
 
         async function AdminSigninFunction(){
             try{
-                const res = await axios.post("http://localhost:3000/admin/signin",{
+                const res = await axios.post("https://course-selling-backend-fiib.onrender.com/admin/signin",{
                     username,
                     password
                 },{
