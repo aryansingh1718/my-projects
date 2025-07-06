@@ -1,5 +1,4 @@
-require("dotenv").config(); // Optional for local dev
-// dummy change to trigger render deploy
+require("dotenv").config(); // Optional for local devv
 
 
 const express = require("express");
