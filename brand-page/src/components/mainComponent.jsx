@@ -3,7 +3,7 @@ import React from 'react'
 const MainComponent = () => {
   return (
     <div>
-        <div className='grid grid-cols-2 mt-5 '>
+        <div className=' grid grid-cols-1 md:grid-cols-2 mt-5 '>
             <div className='col-span-1 ml-4'>
                 <div className='text-8xl font-extrabold '>
                     YOUR FEET 
