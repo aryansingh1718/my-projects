@@ -10,7 +10,7 @@ function App() {
     const wsRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
-    const ws = new WebSocket(import.meta.env.VITE_WS_URL);
+    const ws = new WebSocket("wss://chat-app-backend-kxa0.onrender.com");
     wsRef.current = ws;
     ws.onopen = () => { 
       console.log("Connected to WebSocket "); 
