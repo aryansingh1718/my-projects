@@ -1,0 +1,113 @@
+const express = require("express");
+const {User,Course} = require("./mongoose");
+const router = express.Router();
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "aryan_project1";
+const userMiddleware = require("./userMiddleware");
+const z = require("zod");
+
+const userSchema = z.object({
+  username: z.string().min(1, "Username required"),
+  password: z.string().min(1, "Password required")
+});
+
+router.post('/signup',async(req,res) => {
+    const parsedInputs = userSchema.safeParse(req.body);
+    if (!parsedInputs.success){
+        return res.json({
+            msg:"enter correct inputs"
+        })
+    }
+    
+    else{
+        const {username,password} = parsedInputs.data;
+        
+  const alreadyExists = await User.findOne({
+        username,
+});
+
+if(alreadyExists){
+    return res.status(409).json({
+        msg:"User with given credentials already exists"
+    });
+}else{
+   await User.create({
+        username,
+        password
+    })
+    return res.json({
+        msg:"User created successfully"
+    })
+}
+    }
+
+});
+
+router.post('/signin',async (req,res) => {
+
+        const parsedInputs = userSchema.safeParse(req.body);
+        if(!parsedInputs.success){
+              return res.json({
+            msg:"enter correct inputs"
+        })
+        }
+        else{
+             const {username,password} = parsedInputs.data;
+        const user = await User.findOne({
+            username
+        });
+        if(user){
+            const token  = jwt.sign({
+                username
+            },JWT_SECRET);
+            res.json({
+                token
+            });
+        }
+        else{
+            res.status(411).json({
+                msg:"user doesn't exist"
+            })
+        }
+        }
+       
+});
+
+router.get("/showCourses",userMiddleware,async(req,res) => {
+    const courses = await Course.find({});
+    res.json({
+        courses
+    });
+})
+
+router.post('/purchaseCourses',userMiddleware,async(req,res) => {
+    const id = req.body.id;
+
+    await User.updateOne({
+        username:req.user.username
+    },{
+        "$push":{
+            purchasedCourses:id
+        }
+    })
+    res.json({
+        msg:"purchase complete"
+    });
+});
+
+router.get('/getPurchasedCourses',userMiddleware, async(req,res) => {
+    const user = await User.findOne({
+        username:req.user.username
+    });
+   const courses =  await Course.find({
+    _id:{
+        "$in":user.purchasedCourses
+    }
+   })
+   res.json({
+    courses
+   })
+    
+});
+
+module.exports = router;
