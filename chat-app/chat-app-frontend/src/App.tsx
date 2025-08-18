@@ -10,7 +10,7 @@ function App() {
     const wsRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
+    const ws = new WebSocket(import.meta.env.VITE_WS_URL);
     wsRef.current = ws;
     ws.onopen = () => { 
       console.log("Connected to WebSocket "); 
